@@ -8,9 +8,9 @@ make clean
 sphinx-apidoc -o source ..
 make html
 
-cp cp -r build/html/* ${TMP_DIR}
+cp -r build/html/* ${TMP_DIR}
 
-popd docs
+popd
 
 git checkout gh-pages
 rm -rf *
