@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Table of Contents" href="index.html" /> 
+    <link rel="prev" title="MultiPath" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -148,8 +148,144 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="multipath-module">
-<h1>multipath module<a class="headerlink" href="#multipath-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-multipath">
+<span id="multipath-module"></span><h1>multipath module<a class="headerlink" href="#module-multipath" title="Permalink to this headline">¶</a></h1>
+<p>This module implements functions for working with multiple directories at once.</p>
+<p>A common use-case is when a project needs to build paths relative to multiple root directories and return the first path
+that exists. This module supplies the <cite>resolve</cite> method for doing that.</p>
+<dl class="function">
+<dt id="multipath.join">
+<code class="descclassname">multipath.</code><code class="descname">join</code><span class="sig-paren">(</span><em>dirs</em>, <em>*paths</em><span class="sig-paren">)</span><a class="headerlink" href="#multipath.join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first dir in <cite>dirs</cite> joined with <cite>*paths</cite> using <cite>os.path.join</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dirs</strong> – A list of dir strings</li>
+<li><strong>paths</strong> – Path components to join onto the first dir in <cite>dirs</cite></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A path created by calling <cite>os.path.join</cite> on the first dir in <cite>dirs</cite> with <cite>*paths</cite>.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">ValueError: if <cite>dirs</cite> is empty</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="multipath.join_all">
+<code class="descclassname">multipath.</code><code class="descname">join_all</code><span class="sig-paren">(</span><em>dirs</em>, <em>*paths</em><span class="sig-paren">)</span><a class="headerlink" href="#multipath.join_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of paths created by calling <cite>os.path.join</cite> on each dir in <cite>dirs</cite> with <cite>*paths</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dirs</strong> – A list of dir strings</li>
+<li><strong>path</strong> – Path components to join onto each dir in <cite>dirs</cite></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of paths created by calling <cite>os.path.join</cite> on each dir in <cite>dirs</cite> with <cite>*paths</cite></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="multipath.resolve">
+<code class="descclassname">multipath.</code><code class="descname">resolve</code><span class="sig-paren">(</span><em>dirs</em>, <em>*paths</em><span class="sig-paren">)</span><a class="headerlink" href="#multipath.resolve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Joins <cite>paths</cite> onto each dir in <cite>dirs</cite> using <cite>os.path.join</cite> until one of the join results is found to exist and
+returns the existent result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dirs</strong> – A list of dir strings to resolve against</li>
+<li><strong>paths</strong> – Path components to join onto each dir in <cite>dirs</cite></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>:return A path created by calling <cite>os.path.join</cite> on a dir in <cite>dirs</cite> with <cite>*paths</cite>.
+:raises ValueError: If <cite>dirs</cite> is empty
+:raises FileNotFoundError: If joining <cite>paths</cite> onto all dirs in <cite>dirs</cite> always resulted in non-existent paths.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="multipath.resolve_all">
+<code class="descclassname">multipath.</code><code class="descname">resolve_all</code><span class="sig-paren">(</span><em>dirs</em>, <em>*paths</em><span class="sig-paren">)</span><a class="headerlink" href="#multipath.resolve_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of paths created by joining <cite>paths</cite> onto each dir in <cite>dirs</cite> using <cite>os.path.join</cite> and discarding all
+join results that do not exist.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dirs</strong> – A list of dir strings to resolve against</li>
+<li><strong>paths</strong> – Path components to join onto each dir in <cite>dirs</cite> with <cite>os.path.join</cite></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of paths created by joining <cite>paths</cite> onto each dir in <cite>dirs</cite> using <cite>os.path.join</cite> and discarding all</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>join results that do not exist.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="multipath.try_join">
+<code class="descclassname">multipath.</code><code class="descname">try_join</code><span class="sig-paren">(</span><em>dirs</em>, <em>*paths</em><span class="sig-paren">)</span><a class="headerlink" href="#multipath.try_join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first dir in <cite>dirs</cite> joined with <cite>*paths</cite> using <cite>os.path.join</cite>, or None if <cite>dirs</cite> is empty.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dirs</strong> – A list of dir strings</li>
+<li><strong>paths</strong> – Path components to join onto the first dir in <cite>dirs</cite></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A path created by calling <cite>os.path.join</cite> on the first dir in <cite>dirs</cite> with <cite>*paths</cite>, or None if <cite>dirs</cite> is</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>empty.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="multipath.try_resolve">
+<code class="descclassname">multipath.</code><code class="descname">try_resolve</code><span class="sig-paren">(</span><em>dirs</em>, <em>*paths</em><span class="sig-paren">)</span><a class="headerlink" href="#multipath.try_resolve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Joins <cite>paths</cite> onto each dir in <cite>dirs</cite> using <cite>os.path.join</cite> until one of the join results is found to exist and
+returns the existent result. If none of the results exist, returns None.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>dirs</strong> – A list of dir strings to resolve against</li>
+<li><strong>paths</strong> – Path components to join onto each dir in <cite>dirs</cite></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>:return A path created by calling <cite>os.path.join</cite> on a dir in <cite>dirs</cite> with <cite>*paths</cite>, or None if joining <cite>paths</cite> onto
+all dirs in <cite>dirs</cite> always resulted in a non-existent path</p>
+</dd></dl>
+
 </div>
 
 
@@ -161,7 +297,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="index.html" class="btn btn-neutral" title="Table of Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="MultiPath" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

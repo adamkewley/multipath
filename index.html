@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Table of Contents &mdash; MultiPath 0.0.1 documentation</title>
+  <title>MultiPath &mdash; MultiPath 0.0.1 documentation</title>
   
 
   
@@ -129,7 +129,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>Table of Contents</li>
+      <li>MultiPath</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -148,21 +148,56 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="table-of-contents">
-<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="multipath">
+<h1>MultiPath<a class="headerlink" href="#multipath" title="Permalink to this headline">¶</a></h1>
+<p>A miniscule python package for joining and resolving paths against
+multiple possible directories.</p>
+<p>[<a class="reference external" href="https://adamkewley.github.io/multipath/">documentation</a>]</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To install use pip:</p>
+<blockquote>
+<div>$ pip install multipath</div></blockquote>
+<p>Or clone the repo:</p>
+<blockquote>
+<div>$ git clone <a class="reference external" href="https://github.com/adamkewley/multipath.git">https://github.com/adamkewley/multipath.git</a>
+$ python setup.py install</div></blockquote>
+</div>
+<div class="section" id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">multipath</span>
+
+<span class="n">paths</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;./&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;~/.someapp/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;etc/someapp/&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># returns:</span>
+<span class="c1">#   &#39;./config.yml` if it exists; or,</span>
+<span class="c1">#   &#39;~/.someapp/config.yml` if it exists; or,</span>
+<span class="c1">#   &#39;etc/someapp/config.yml` if it exists; or,</span>
+<span class="c1">#   raises FileNotFoundError</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">multipath</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="s2">&quot;config.yml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="multipath.html">multipath module</a></li>
 </ul>
 </div>
+</div>
+</div>
 <div class="section" id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 <li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
-</div>
 </div>
 
 
