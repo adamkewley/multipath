@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 TMP_DIR=$(mktemp -d)
 
 pushd docs
