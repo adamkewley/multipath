@@ -4,6 +4,7 @@
 cd docs
 make clean
 make html
+sphinx-apidoc -o source
 cd ..
 
 # commit and push
