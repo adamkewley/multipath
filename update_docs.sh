@@ -1,27 +1,18 @@
 #!/usr/bin/env bash
 
-# build the docs
-cd docs
+TMP_DIR=mktemp -d
+
+pushd docs
+
 make clean
-make html
 sphinx-apidoc -o source ..
-cd ..
+make html
 
-# commit and push
-git add -A
-git commit -m "building and pushing docs"
-git push origin master
+mv build/html/* ${TMP_DIR}
 
-# switch branches and pull the data we want
+popd docs
+
 git checkout gh-pages
-rm -rf .
+rm -rf *
 touch .nojekyll
-git checkout master docs/build/html
-mv ./docs/build/html/* ./
-rm -rf ./docs
-git add -A
-git commit -m "publishing updated docs..."
-git push origin gh-pages
-
-# switch back
-git checkout master
+mv ${TMP_DIR}/* .
