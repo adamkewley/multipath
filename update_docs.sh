@@ -4,6 +4,7 @@ set -e
 
 TMP_DIR=$(mktemp -d)
 
+
 pushd docs
 
 make clean
@@ -13,6 +14,7 @@ make html
 cp -r build/html/* ${TMP_DIR}
 
 popd
+
 
 git checkout gh-pages
 rm -rf *

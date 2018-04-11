@@ -20,21 +20,26 @@ dependency_links = [x.strip().replace('git+', '') for x in all_reqs if x.startsw
 setup(
     name='multipath',
     version=__version__,
+    license='Apache License 2.0',
+
     description='A miniscule python package for joining and resolving paths against multiple possible directories.A python package for resolving relative paths against multiple root directories',
     long_description=long_description,
+    keywords='',
+
+    author='Adam Kewley',
+    author_email='contact@adamkewley.com',
+
     url='https://github.com/adamkewley/multipath',
     download_url='https://github.com/adamkewley/multipath/tarball/' + __version__,
-    license='BSD',
+
     classifiers=[
       'Development Status :: 3 - Alpha',
       'Intended Audience :: Developers',
       'Programming Language :: Python :: 3',
     ],
-    keywords='',
+
     packages=find_packages(exclude=['docs', 'tests*']),
     include_package_data=True,
-    author='Adam Kewley',
     install_requires=install_requires,
     dependency_links=dependency_links,
-    author_email='contact@adamkewley.com'
 )
