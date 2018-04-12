@@ -38,7 +38,7 @@ setup(
       'Programming Language :: Python :: 3',
     ],
 
-    packages=find_packages(exclude=['docs', 'tests*']),
+    py_modules=["multipath"],
     include_package_data=True,
     install_requires=install_requires,
     dependency_links=dependency_links,
